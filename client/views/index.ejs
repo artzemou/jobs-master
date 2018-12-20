@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/?level=level1&method=rentalsCalculation">Level 1</a></li>
+      <li><a href="/?level=level2&method=rentalsCalculationWithPercentDecreases">Level 2</a></li>
+      <li><a href="/?level=level3&method=rentalsCommission">Level 3</a></li>
+      <li><a href="/?level=4">Level 4</a></li>
+      <li><a href="/?level=5">Level 5</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Expected output:</h2>
+    <p>... generated into the root's outputs folder</p>
+    <section></section>
+
+  </main>
+
+  <script>
+      var method = <%-JSON.stringify(method)%>
+      var level = <%-JSON.stringify(level)%>
+      console.log(method, level)
+  </script>
+  <script src="client/js/utils.js"></script>
+
+</body>
+</html>

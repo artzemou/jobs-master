@@ -1,0 +1,34 @@
+{
+  "rentals": [
+    {
+      "id": 1,
+      "price": 3000,
+      "priceNotDecreased": 3000,
+      "commission": {
+        "insurance_fee": 450,
+        "assistance_fee": 1,
+        "drivy_fee": 350
+      }
+    },
+    {
+      "id": 2,
+      "price": 6800,
+      "priceNotDecreased": 7000,
+      "commission": {
+        "insurance_fee": 1020,
+        "assistance_fee": 2,
+        "drivy_fee": 820
+      }
+    },
+    {
+      "id": 3,
+      "price": 27800,
+      "priceNotDecreased": 34000,
+      "commission": {
+        "insurance_fee": 4170,
+        "assistance_fee": 12,
+        "drivy_fee": 2970
+      }
+    }
+  ]
+}

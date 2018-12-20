@@ -1,0 +1,13 @@
+{
+  "name": "jobs-master",
+  "version": "1.0.0",
+  "description": "jobs-master-test",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
