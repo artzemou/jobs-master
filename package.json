@@ -8,6 +8,11 @@
     "start": "node start.js"
   },
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-register": "^6.26.0"
   }
 }
