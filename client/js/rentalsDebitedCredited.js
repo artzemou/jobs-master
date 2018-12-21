@@ -28,12 +28,33 @@ utils.include('client/js/car.js', () => {
                 ...output,
                 {
                   id: rental.id,
-                  price: price,
-                  commission: {
-                    "insurance_fee": rental.getInsuranceFee(price),
-                    "assistance_fee": rental.getAssistanceFee(), // 100€/peer day ???
-                    "drivy_fee": rental.getDrivyFee(price)
-                  }
+                  "actions": [
+                    {
+                      "who": "driver",
+                      "type": "debit",
+                      "amount": price
+                    },
+                    {
+                      "who": "owner",
+                      "type": "credit",
+                      "amount": rental.getOwnerCreditedRent(price)
+                    },
+                    {
+                      "who": "insurance",
+                      "type": "credit",
+                      "amount": rental.getInsuranceFee(price)
+                    },
+                    {
+                      "who": "assistance",
+                      "type": "credit",
+                      "amount": rental.getAssistanceFee()
+                    },
+                    {
+                      "who": "drivy",
+                      "type": "credit",
+                      "amount": rental.getDrivyFee(price)
+                    }
+                  ]
                 }
               ]
             }
