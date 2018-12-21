@@ -6,8 +6,7 @@ import  path from 'path'
 
 app.use('/client', express.static('client'))
 app.use('/backend', express.static('backend'))
-// app.use('/public', express.static('backend'), express.static('public'))
-// app.use('/public', express.static('outputs'), express.static('public'))
+
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'));
@@ -15,7 +14,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', function (req, res) {
-  res.render('index.ejs', { method: req.query.method, level: req.query.level})
+  if(req.query.level) res.render('index.ejs', { method: req.query.method, level: req.query.level })
+  else res.render('index.ejs', { method: null, level: null })
 })
 
 app.post('/output', (req, res) => {

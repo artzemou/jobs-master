@@ -1,19 +1,16 @@
-class Utils {
-   /* *** DEFINITION DES METHODES *** */
+class Loader {
    include(url, callback){
-       /* on crée une balise<script type="text/javascript"></script> */
+       // Create script tag
        var script = document.createElement('script');
        script.type = 'text/javascript';
-       /* On fait pointer la balise sur le script qu'on veut charger
-          avec en prime un timestamp pour éviter les problèmes de cache
-       */
+       //  Add src with timestamp to avoid cache problems
        script.src = url + '?' + (new Date().getTime());
-       /* On dit d'exécuter cette fonction une fois que le script est chargé */
+       // Execute callback function when script is loaded
        if (callback) {
            script.onreadystatechange = callback;
            script.onload = script.onreadystatechange;
        }
-       /* On rajoute la balise script dans le head, ce qui démarre le téléchargement */
+       // Add Tag and load script
        document.getElementsByTagName('head')[0].appendChild(script);
    }
 
@@ -25,8 +22,8 @@ class Utils {
        .then((data) => {
          callback(data)
        })
-       .catch((errors) => {
-         console.log(errors)
+       .catch((error) => {
+         console.log('Request failed', error)
        });
    }
 
@@ -40,14 +37,13 @@ class Utils {
        body: body
      })
      .then(function (response) {
-         console.log(response)
+
      })
      .catch (function (error) {
-         console.log('Request failed', error);
+         console.log('Request failed', error)
      })
    }
 }
 
-const utils = new Utils()
-
-utils.include(`client/js/${method}.js`)
+const loader = new Loader()
+if(method) loader.include(`client/js/${method}.js`)

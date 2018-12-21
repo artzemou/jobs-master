@@ -1,7 +1,7 @@
-utils.include('client/js/car.js', () => {
-  utils.include('client/js/rental.js', () => {
-    utils.get(`backend/${level}/data/input.json`, (data) => {
-      var output = new Array(), price
+loader.include('client/js/car.js', () => {
+  loader.include('client/js/rental.js', () => {
+    loader.get(`backend/${level}/data/input.json`, (data) => {
+      var output = new Array()
       data.rentals.map((rental, index) => {
         var carId = rental.car_id
         // hydrate car and rental object
@@ -9,15 +9,12 @@ utils.include('client/js/car.js', () => {
         data.cars.filter( car => {
             if(car.id === carId) {
               var car = new Car(carId, car.price_per_day, car.price_per_km)
-
               // rental calculation
-              let {duration, distance} = rental
-              let {pricePerDay, pricePerKm} = car
-              price = duration * pricePerDay + distance * pricePerKm
+              rental.setAmount(car.pricePerDay, car.pricePerKm)
               // push rental item in rentals array
               output = [
                 ...output,
-                {id: rental.id, price: price}
+                {id: rental.id, price: rental.amount}
               ]
             }
         })
@@ -29,7 +26,7 @@ utils.include('client/js/car.js', () => {
       // write outputJson on client side
       document.querySelector('section').innerHTML = '<pre>'+JSON.stringify(_output, null, 2)+'</pre>'
       //write outputJson file in the root's outputs folder
-      utils.post(JSON.stringify({output: _output, level: level}))
+      loader.post(JSON.stringify({output: _output, level: level}))
     })
   })
 })

@@ -7,10 +7,10 @@ class Car {
       this.pricePerDayAfterFourDay = this.pricePerDay - this.pricePerDay * .3
       this.pricePerDayAfterTenDay = this.pricePerDay - this.pricePerDay * .5
       this.pricePerKm = pricePerKm
-
    }
-   /* *** DEFINITION DES METHODES *** */
+   /* *** METHODS *** */
    generateOutput() {
       return `${this.pricePerDay}`
    }
+
 }

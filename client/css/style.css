@@ -1,0 +1,38 @@
+html{
+  background: #eeeeee;
+  padding: 3rem;
+  color: #444444;
+}
+
+body {
+  display: flex;
+}
+
+li {
+  display: flex;
+  padding: .25rem;
+  background: url('../assets/icon-folder.svg') 0 8px no-repeat ;
+}
+
+a {
+  margin-left: 1rem;
+  padding: .25rem;
+  font-size: 16px;
+  color: #444444;
+}
+
+main {
+  margin-left: 40px;
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+sup {
+  font-size: 1rem;
+  font-weight: normal;
+}
+pre {
+  margin-left: 3rem;
+}

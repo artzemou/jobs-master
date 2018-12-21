@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="client/css/style.css"/>
 </head>
 <body>
   <nav>
@@ -14,23 +15,23 @@
       <li><a href="/?level=level2&method=rentalsCalculationWithPercentDecreases">Level 2</a></li>
       <li><a href="/?level=level3&method=rentalsCommission">Level 3</a></li>
       <li><a href="/?level=level4&method=rentalsDebitedCredited">Level 4</a></li>
-      <li><a href="/?level=5">Level 5</a></li>
+      <li><a href="/?level=level5&method=rentalsWithOptions">Level 5</a></li>
     </ul>
   </nav>
+  <% if (method) {%>
+    <main>
+      <h2><%= level %></h2>
+      <p>Expected output  is generated into the root's outputs folder... </p>
+      <section></section>
 
-  <main>
-    <h2>Expected output:</h2>
-    <p>... generated into the root's outputs folder</p>
-    <section></section>
-
-  </main>
+    </main>
+  <% } %>
 
   <script>
       var method = <%-JSON.stringify(method)%>
       var level = <%-JSON.stringify(level)%>
-      console.log(method, level)
   </script>
-  <script src="client/js/utils.js"></script>
+  <script src="client/js/loader.js"></script>
 
 </body>
 </html>

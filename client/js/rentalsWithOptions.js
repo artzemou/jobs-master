@@ -13,16 +13,22 @@ loader.include('client/js/car.js', () => {
               // rental decreased calculation
               rental.setAmountWithPercentDecreases(car.pricePerDay, car.pricePerKm, car.pricePerDayAfterOneDay, car.pricePerDayAfterFourDay, car.pricePerDayAfterTenDay)
 
+              //set Options
+              data.options.filter(option => {
+                if(option.rental_id === rental.id) rental.setOptions(option)
+              })
+              rental.setOptionsAmount()
               // push rental item in rentals array
               output = [
                 ...output,
                 {
                   id: rental.id,
+                  "options": rental.options,
                   "actions": [
                     {
                       "who": "driver",
                       "type": "debit",
-                      "amount": rental.amount
+                      "amount": rental.amount + rental.optionsDrivyAmount + rental.optionsOwnerAmount
                     },
                     {
                       "who": "owner",

@@ -1,38 +1,26 @@
-utils.include('client/js/car.js', () => {
-  utils.include('client/js/rental.js', () => {
-    utils.get(`backend/${level}/data/input.json`, (data) => {
+loader.include('client/js/car.js', () => {
+  loader.include('client/js/rental.js', () => {
+    loader.get(`backend/${level}/data/input.json`, (data) => {
       var output = new Array()
       data.rentals.map((rental, index) => {
         var carId = rental.car_id
         // hydrate car and rental object
         var rental = new Rental(rental.id, rental.car_id, rental.start_date, rental.end_date, rental.distance)
         data.cars.filter( car => {
-            let price = 0
             if(car.id === carId) {
               var car = new Car(carId, car.price_per_day, car.price_per_km)
-
               // rental decreased calculation
-              let {duration, distance} = rental
-              let {pricePerDay, pricePerKm, pricePerDayAfterOneDay, pricePerDayAfterFourDay, pricePerDayAfterTenDay} = car
-              while (duration) {
-                if (duration > 10) price = price +  pricePerDayAfterTenDay
-                else if (duration > 4) price = price +  pricePerDayAfterFourDay
-                else if (duration > 1) price = price +  pricePerDayAfterOneDay
-                else price = price + pricePerDay
-                duration--
-              }
-              price = price + distance * pricePerKm
-
+              rental.setAmountWithPercentDecreases(car.pricePerDay, car.pricePerKm, car.pricePerDayAfterOneDay, car.pricePerDayAfterFourDay, car.pricePerDayAfterTenDay)
               // push rental item in rentals array
               output = [
                 ...output,
                 {
                   id: rental.id,
-                  price: price,
+                  price: rental.amount,
                   commission: {
-                    "insurance_fee": rental.getInsuranceFee(price),
+                    "insurance_fee": rental.getInsuranceFee(rental.amount),
                     "assistance_fee": rental.getAssistanceFee(), // 100€/peer day ???
-                    "drivy_fee": rental.getDrivyFee(price)
+                    "drivy_fee": rental.getDrivyFee(rental.amount)
                   }
                 }
               ]
@@ -46,7 +34,7 @@ utils.include('client/js/car.js', () => {
       // write outputJson on client side
       document.querySelector('section').innerHTML = '<pre>'+JSON.stringify(_output, null, 2)+'</pre>'
       //write outputJson file in the root's outputs folder
-      utils.post(JSON.stringify({output: _output, level: level}))
+      loader.post(JSON.stringify({output: _output, level: level}))
     })
   })
 })
